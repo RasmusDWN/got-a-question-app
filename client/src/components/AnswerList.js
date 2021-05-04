@@ -6,7 +6,7 @@ export default function AnswerList({answers}) {
         <div className="answer-list">
             {answers.map((answer) => (
               <AnswerItem
-                id={answer._id}
+                key={answer._id}
                 answer={answer.answer}
                 username={answer.username}
                 upvotes={answer.upvotes} 

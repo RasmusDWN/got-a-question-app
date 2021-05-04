@@ -8,7 +8,6 @@ module.exports = (mongoose) => {
         title: String,
         username: String,
         description: String,
-        // date: { type: Date, default: Date.now},
         answers: [answerSchema]
     });
 

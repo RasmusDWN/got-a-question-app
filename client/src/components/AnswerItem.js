@@ -1,9 +1,11 @@
-export default function AnswerItem({id, answer, username, upvotes}) {
-    return (
-        <div className="answer" key={`a${id}`}>
-            <h4>{username}</h4>
-            <p>{answer}</p>
+import { useState } from "react";
 
+export default function AnswerItem({answer, username, upvotes}) {
+    return (
+        <div className="answer">
+            <p>{answer}</p>
+            <small>{username}</small>
+            <div className="votes">{upvotes}</div>
         </div>
     );
 }
