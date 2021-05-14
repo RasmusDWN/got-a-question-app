@@ -1,5 +1,6 @@
 import Button from "./Button";
 import AnswerItem from "./AnswerItem";
+import "./AnswerList.css";
 
 export default function AnswerList({answers}) {
     return (
