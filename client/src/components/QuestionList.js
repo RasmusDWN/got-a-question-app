@@ -29,6 +29,7 @@ export default function QuestionList({questions}) {
           {questions.map((question) => (
               <QuestionItem
                 id={question._id}
+                key={question._id}
                 question={question.title}
                 desc={question.description} 
                 />
