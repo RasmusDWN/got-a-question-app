@@ -37,6 +37,16 @@ module.exports = (questionDB) => {
     }    
   });
 
+  router.post('/:id/votes/:answerId', async (req, res) => {
+    const answerId = req.params.answerId;
+
+    if (answerId) {
+      await questionDB.vote(answerId, "up");
+      res.status(200).send("Ok");
+    } else {
+      res.status(400).send("Missing answerId");
+    }
+  });
 
 
   return router;
