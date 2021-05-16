@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import QuestionList from "../components/QuestionList";
 import AddQuestion from "../components/AddQuestion";
 
-
+const API_URL = process.env.API_URL || 'http://localhost:8080';
 export default function Home() {
     const [questions, setQuestions] = useState([]);
     const [isLoading, setIsLoading] = useState([true]);
@@ -10,7 +10,7 @@ export default function Home() {
 
     useEffect(() => { 
         if (isLoading) {
-            fetch("http://localhost:8080/api")
+            fetch(API_URL + "/api")
             .then(res => res.json())
             .then(data => { 
                 setQuestions(data);

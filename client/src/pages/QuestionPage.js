@@ -5,12 +5,16 @@ import { useParams } from "@reach/router";
 import { useState, useEffect } from "react";
 import AnswerForm from "../components/AnswerForm";
 
+const API_URL = process.env.NODE_ENV === "development"
+    ? "http://localhost:8080"
+    : "";
+
 export default function QuestionPage() {
     const [question, setQuestion] = useState(null);
     const [isLoading, setIsLoading] = useState([true]);
     
     const handleAnswerPost = (answer) => {
-        const url = `http://localhost:8080/api/${question._id}/answers`;
+        const url = `${API_URL}/api/${question._id}/answers`;
         fetch(url, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -34,7 +38,7 @@ export default function QuestionPage() {
    
     useEffect(() => { 
         if (isLoading && params.id) {
-            fetch("http://localhost:8080/api/" + params.id)
+            fetch(API_URL + "/api/" + params.id)
             .then(res => res.json())
             .then(data => { 
                 setQuestion(data);
