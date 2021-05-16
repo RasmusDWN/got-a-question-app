@@ -52,7 +52,7 @@ export default function QuestionPage() {
     }
 
     return (
-        <div className="question-page">
+        <div className="mx-3">
             <QuestionItem
                 id={question._id}
                 question={question.title}

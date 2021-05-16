@@ -1,22 +1,36 @@
 import { useState } from "react";
 
-export default function AddQuestion({props}) {
+export default function AddQuestion({onQuestionPost}) {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    return (
-        <>
-        <h3> Got a Question? Ask!</h3>
-        <input onChange={(event) => setTitle(event.target.value)} type="text" placeholder="Title" /> <br />
-            What is your question? <br />
-        <input onChange={(event) => setDescription(event.target.value)} type="text" placeholder="description..." /> <br />
+    const handleQuestionPost = (event) => {
+        event.preventDefault();
 
-        <button type="button" onClick={(event) => {
-            props.AddQuestion(title, description);
-        }}> Submit question
-        </button>
-        </>
+        if (typeof onQuestionPost === "function") {
+            onQuestionPost({
+                title,
+                description
+            });
+            setTitle("");
+            setDescription("");
+        }
+    } 
+
+
+    return (
+        <form>
+            <div className="form-group mb-2">
+                <label htmlFor="questionTitle" className="form-label">Enter your question:</label>
+                <input className="form-control" onChange={(event) => setTitle(event.target.value)} type="text" placeholder="Title" />
+            </div>
+            <div className="form-group mb-2">
+                <label htmlFor="questionDescription" className="form-label">Describe your question:</label>
+                <textarea className="form-control" id="questionDescription" onChange={(event) => setDescription(event.target.value)}></textarea>
+            </div>
+            <button type="button" className="btn btn-primary" onClick={handleQuestionPost}>Submit question</button>
+        </form>
     );
 
 }

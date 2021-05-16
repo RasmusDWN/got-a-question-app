@@ -14,9 +14,9 @@ export default function AnswerForm({onAnswerPost}) {
 
     return (
         
-        <form class="form-check form-check-inline">
-            <div class="form-group mx-sm-3 mb-2">
-                <textarea onChange={(event) => setAnswer(event.target.value)} class="form-control" value={answer} placeholder="Your answer"></textarea>                
+        <form>
+            <div className="form-group mb-2">
+                <textarea onChange={(event) => setAnswer(event.target.value)} className="form-control" value={answer} placeholder="Your answer"></textarea>                
             </div>
             <button type="button" onClick={handleButtonClick} className="btn btn-primary mb-2" >Post Answer</button>
         </form>

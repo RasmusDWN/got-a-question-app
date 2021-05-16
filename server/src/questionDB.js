@@ -18,13 +18,16 @@ module.exports = (mongoose) => {
         // add a new Question
         const newQuestion = new Question({
             title: title,
-            description: description
+            description: description,
+            username: "", /* TODO */
+            answers: []
         });
 
         // Save the new question to the database
         try {
             let savedQuestion = await newQuestion.save();
             console.log("The questions are now saved.", savedQuestion);
+            return savedQuestion;
         } catch(error) {
             console.error("savedQuestions:", error.message);
         }

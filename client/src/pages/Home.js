@@ -9,7 +9,6 @@ const API_URL = process.env.NODE_ENV === "development"
 export default function Home() {
     const [questions, setQuestions] = useState([]);
     const [isLoading, setIsLoading] = useState([true]);
-    // const {AddQuestion} = props;
 
     useEffect(() => { 
         if (isLoading) {
@@ -22,13 +21,16 @@ export default function Home() {
         }
     }, [isLoading]);
 
-    async function addNewQuestion(title, description) {
+    async function handleQuestionPost(question) {
+        await addNewQuestion(question);
+    }
+
+    async function addNewQuestion({ title, description }) {
         console.log(title, description);
         
         const newQuestion = {
             title: title,
-            description: description,
-            answers: [],
+            description: description
         };
 
         const response = await fetch(API_URL + "/api", {
@@ -40,16 +42,15 @@ export default function Home() {
         });
 
         const data = await response.json();
-        console.log("Add Question: " +data)
-        setQuestions([...QuestionList, data.result.Post])
-
+        console.log("Added question: ", data);
+        setQuestions([...questions, data]);
     }
 
     return (
-        <div className="App">
+        <div className="App mx-3">
             <h1>Got a Question?</h1>
             
-            {/* <AddQuestion path="" addQuestion={AddQuestion} /> */}
+            <AddQuestion onQuestionPost={handleQuestionPost} />
             <QuestionList questions={questions}/>
         </div>
     );

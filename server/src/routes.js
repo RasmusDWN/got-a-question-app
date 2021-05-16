@@ -8,6 +8,18 @@ module.exports = (questionDB) => {
     res.json(questions);
   });
 
+  router.post('/', async (req, res) => {
+    const question = req.body;
+
+    if (question && question.title && question.description) {
+      const savedQuestion = await questionDB.createQuestion(question.title, question.description);
+      res.json(savedQuestion);
+    } else {
+      res.status(400).send("Missing title and/or description");
+    }
+
+  });
+
   router.get('/:id', async (req, res) => {
     const question = await questionDB.getQuestion(req.params.id);
     res.json(question);
@@ -22,11 +34,10 @@ module.exports = (questionDB) => {
       res.json(newAnswer);
     } else {
       res.status(400).send("Missing id or answer");
-    }
-    
-  }
-  
-  )
+    }    
+  });
+
+
 
   return router;
 }
