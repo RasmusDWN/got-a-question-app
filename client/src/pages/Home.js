@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import QuestionList from "../components/QuestionList";
 import AddQuestion from "../components/AddQuestion";
 
-const API_URL = process.env.API_URL || 'http://localhost:8080';
+const API_URL = process.env.NODE_ENV === "development"
+    ? "http://localhost:8080"
+    : "";
+
 export default function Home() {
     const [questions, setQuestions] = useState([]);
     const [isLoading, setIsLoading] = useState([true]);
@@ -28,7 +31,7 @@ export default function Home() {
             answers: [],
         };
 
-        const response = await fetch("http://localhost:8080/api", {
+        const response = await fetch(API_URL + "/api", {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
