@@ -66,7 +66,7 @@ module.exports = (mongoose) => {
             for (let i = 0; i < count; i++) {
                 let newQuestion = new Question({
                     title: `Question number ${i}`, 
-                    escription: `desc test`, 
+                    description: `desc test`, 
                     answers: [{
                         answer: `This is an answer`,
                         username: `Username`,
